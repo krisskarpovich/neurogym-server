@@ -81,7 +81,6 @@ def refresh_token(refresh_token: str = Body(...), db: Session = Depends(get_db))
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid refresh token")
 
-    # Проверяем, есть ли этот refresh токен в базе
     db_token = (
         db.query(RefreshToken).filter_by(token=refresh_token, user_id=user_id).first()
     )
@@ -91,7 +90,6 @@ def refresh_token(refresh_token: str = Body(...), db: Session = Depends(get_db))
     new_access_token = create_access_token({"sub": str(user_id)})
     new_refresh_token = create_refresh_token({"sub": str(user_id)})
 
-    # Обновляем refresh token в базе
     db_token.token = new_refresh_token
     db.commit()
 
