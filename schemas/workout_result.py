@@ -5,7 +5,6 @@ from datetime import date, datetime
 
 
 class WorkoutResultCreate(BaseModel):
-    user_id: int
     workout_id: int
     date: datetime
     duration_minutes: Optional[int] = None

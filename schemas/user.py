@@ -21,8 +21,6 @@ class UserCreate(BaseModel):
             raise ValueError("Passwords do not match")
         return values
 
-    # schemas.py
-
 class UserLogin(BaseModel):
     email: EmailStr
     password: str

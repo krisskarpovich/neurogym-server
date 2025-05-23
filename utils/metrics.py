@@ -1,3 +1,4 @@
+import math
 import numpy as np
 
 def calculate_angle(a, b, c):
@@ -17,3 +18,15 @@ def get_body_lean_angle(shoulder, hip):
     radians = np.arctan2(dy, dx)
     angle = np.abs(radians * 180.0 / np.pi)
     return angle
+
+def get_crunch_angle(shoulder: object, hip: object) -> float:
+    """Угол между линией плеч-стопа и вертикалью"""
+    # Пример для правой стороны
+    vertical = [0, 1]
+    body_vector = [shoulder.x - hip.x, shoulder.y - hip.y]
+
+    angle = math.degrees(
+        math.atan2(vertical[1], vertical[0])
+        - math.atan2(body_vector[1], body_vector[0])
+    )
+    return abs(angle)

@@ -14,5 +14,5 @@ def create_workout(db: Session, user_id: int, workout_data: WorkoutCreate):
     db.refresh(workout)
     return workout
 
-def get_user_workouts(db: Session, user_id: int):
-    return db.query(Workout).filter(Workout.user_id == user_id).order_by(Workout.date.desc()).all()
+# def get_user_workouts(db: Session, user_id: int):
+#     return db.query(Workout).filter(Workout.user_id == user_id).order_by(Workout.date.desc()).all()
