@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, get_db
 from services.workout import create_workout, get_workout_by_id, get_workouts
 from schemas.workout import WorkoutSchema, WorkoutCreateSchema
-# from schemas.user_workout import UserWorkoutSchema
 from models.workout import Workout
 
 router = APIRouter()

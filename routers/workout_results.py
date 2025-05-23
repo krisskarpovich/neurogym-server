@@ -1,9 +1,8 @@
-from fastapi import APIRouter, Depends, FastAPI, Form, UploadFile, File
+from fastapi import APIRouter, Depends, FastAPI, Form, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse
 from sqlalchemy import Date, cast, select
 from database import get_db
 
-# Импортируем функцию обработки видео
 from sqlalchemy.orm import Session
 
 from models.workout import User, WorkoutResult
@@ -13,13 +12,14 @@ from services.get_user import get_current_user_from_token
 router = APIRouter()
 
 
-from fastapi import HTTPException
-
-
 @router.post("/")
-def save_workout_result(result: WorkoutResultCreate, db: Session = Depends(get_db)):
+def save_workout_result(
+    result: WorkoutResultCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user_from_token),
+):
     try:
-        db_result = WorkoutResult(**result.dict())
+        db_result = WorkoutResult(**result.dict(), user_id=current_user.id)
         db.add(db_result)
         db.commit()
         db.refresh(db_result)
@@ -32,9 +32,6 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import List
 from datetime import date, datetime
-
-
-from sqlalchemy import cast, Date
 
 
 @router.get("/by_date", response_model=List[WorkoutResultRead])
