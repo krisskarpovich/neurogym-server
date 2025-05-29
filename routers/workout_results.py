@@ -12,14 +12,25 @@ from services.get_user import get_current_user_from_token
 router = APIRouter()
 
 
-@router.post("/")
+@router.post("/", response_model=WorkoutResultRead)
 def save_workout_result(
     result: WorkoutResultCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user_from_token),
 ):
     try:
-        db_result = WorkoutResult(**result.dict(), user_id=current_user.id)
+        duration = result.duration_minutes or 0
+        sets = result.sets or 0
+        reps = result.reps or 0
+
+        calculated_calories = (duration * 5) + (sets * reps * 0.1)
+
+        db_result = WorkoutResult(
+            **result.dict(exclude={"calories_burned"}),
+            calories_burned=calculated_calories,
+            user_id=current_user.id,
+        )
+
         db.add(db_result)
         db.commit()
         db.refresh(db_result)

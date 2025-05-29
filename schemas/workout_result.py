@@ -12,6 +12,7 @@ class WorkoutResultCreate(BaseModel):
     reps: Optional[int] = None
     calories_burned: Optional[float] = None
     tips: Optional[str] = None
+    completion: Optional[float] = None
     
     class Config:
         orm_mode = True

@@ -75,5 +75,6 @@ class WorkoutResult(Base):
     reps = Column(Integer, nullable=True)
     calories_burned = Column(Float, nullable=True)
     tips = Column(String, nullable=True)
+    completion = Column(Float, nullable=True)
 
     user = relationship("User", back_populates="workout_results")

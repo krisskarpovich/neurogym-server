@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from routers import (
     activity,
     auth,
+    stats,
     workout,
     video_pick,
     workout_results
@@ -38,6 +39,7 @@ app.include_router(workout.router, prefix="/workouts", tags=["workouts"])
 app.include_router(video_pick.router, prefix="/upload", tags=["upload"])
 app.include_router(workout_results.router, prefix="/workout_results", tags=["workout_results"])
 app.include_router(activity.router, prefix="/activity", tags=["activity"])
+app.include_router(stats.router, prefix="/statistics", tags=["statistics"])
 app.mount(
     "/uploads",
     StaticFiles(directory="/Users/krystsina.karpovich/neurogym_backend/uploads"),
