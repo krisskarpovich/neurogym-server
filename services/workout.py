@@ -22,22 +22,8 @@ def get_workout_by_id(db: Session, workout_id: int):
     return db.query(Workout).filter(Workout.id == workout_id).first()
 
 
-def update_workout(db: Session, workout_id: int, workout: WorkoutCreateSchema):
-    db_workout = db.query(Workout).filter(Workout.id == workout_id).first()
-    if db_workout:
-        for key, value in workout.dict().items():
-            setattr(db_workout, key, value)
-        db.commit()
-        db.refresh(db_workout)
-    return db_workout
 
 
-def delete_workout(db: Session, workout_id: int):
-    db_workout = db.query(Workout).filter(Workout.id == workout_id).first()
-    if db_workout:
-        db.delete(db_workout)
-        db.commit()
-    return db_workout
 
 
 def get_workout_by_id(db: Session, workout_id: int) -> Workout | None:

@@ -52,16 +52,53 @@ class User(Base):
         "WorkoutResult", back_populates="user"
     )  
 
+# class Workout(Base):
+#     __tablename__ = "workouts"
+
+#     id = Column(Integer, primary_key=True, index=True)
+#     logo_url = Column(String, nullable=True)
+#     exercise_type = Column(String, nullable=False)
+#     instructions = Column(String)
+#     image_url = Column(String, nullable=True)
+
+#     tips = relationship("ExerciseTip", back_populates="workout")
+
+class WorkoutType(Base):
+    __tablename__ = "workout_types"
+
+    id = Column(Integer, primary_key=True, index=True)
+    exercise_type = Column(String, nullable=False)
+    logo_url = Column(String, nullable=True)
+
+    workouts = relationship("Workout", back_populates="workout_type")
+
+# class Workout(Base):
+#     __tablename__ = "workouts"
+
+#     id = Column(Integer, primary_key=True, index=True)
+#     workout_type_id = Column(Integer, ForeignKey("workout_types.id"), nullable=False)
+
+#     instructions = Column(String)
+#     image_url = Column(String, nullable=True)
+
+#     workout_type = relationship("WorkoutType", back_populates="workouts")
+
+#     tips = relationship("ExerciseTip", back_populates="workout")
+
 class Workout(Base):
     __tablename__ = "workouts"
 
     id = Column(Integer, primary_key=True, index=True)
-    logo_url = Column(String, nullable=True)
-    exercise_type = Column(String, nullable=False)
+    workout_type_id = Column(Integer, ForeignKey("workout_types.id"), nullable=False)
+
+    workout_title = Column(String, nullable=False)
+    logo_url = Column(String, nullable=True)      
     instructions = Column(String)
     image_url = Column(String, nullable=True)
 
+    workout_type = relationship("WorkoutType", back_populates="workouts")
     tips = relationship("ExerciseTip", back_populates="workout")
+
 
 class WorkoutResult(Base):
     __tablename__ = "workout_results"
