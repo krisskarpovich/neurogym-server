@@ -72,18 +72,6 @@ class WorkoutType(Base):
 
     workouts = relationship("Workout", back_populates="workout_type")
 
-# class Workout(Base):
-#     __tablename__ = "workouts"
-
-#     id = Column(Integer, primary_key=True, index=True)
-#     workout_type_id = Column(Integer, ForeignKey("workout_types.id"), nullable=False)
-
-#     instructions = Column(String)
-#     image_url = Column(String, nullable=True)
-
-#     workout_type = relationship("WorkoutType", back_populates="workouts")
-
-#     tips = relationship("ExerciseTip", back_populates="workout")
 
 class Workout(Base):
     __tablename__ = "workouts"

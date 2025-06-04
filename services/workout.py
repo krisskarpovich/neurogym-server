@@ -23,9 +23,6 @@ def get_workout_by_id(db: Session, workout_id: int):
 
 
 
-
-
-
 def get_workout_by_id(db: Session, workout_id: int) -> Workout | None:
     return db.query(Workout).filter(Workout.id == workout_id).first()
 

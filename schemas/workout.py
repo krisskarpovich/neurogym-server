@@ -14,20 +14,6 @@ class WorkoutCreateSchema(WorkoutBaseSchema):
     pass
 
 
-# class WorkoutSchema(WorkoutBaseSchema):
-#     id: int
-
-#     class Config:
-#         orm_mode = True
-
-
-# class ExerciseTipSchema(BaseModel):
-#     id: int
-#     text: str
-
-#     class Config:
-#         orm_mode = True
-
 
 class WorkoutTypeSchema(BaseModel):
     id: int

@@ -35,7 +35,6 @@ def get_workouts_by_type(type_id: int, db: Session = Depends(get_db)):
     workouts = db.query(Workout).filter(Workout.workout_type_id == type_id).all()
     return workouts
 
-
 @router.get("/{workout_id}", response_model=WorkoutSchema)
 def read_workout_by_id(workout_id: int, db: Session = Depends(get_db)):
     workout = get_workout_by_id(db, workout_id)
