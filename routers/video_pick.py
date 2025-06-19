@@ -24,7 +24,7 @@ async def upload_video(
     return JSONResponse(
         content={
             "advice": result["tips"],
-            "video_url": file.filename,
+            "video_url": result["processed_video_url"],
             "completion": result["completion"],
         }
     )

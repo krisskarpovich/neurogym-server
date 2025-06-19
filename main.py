@@ -45,6 +45,12 @@ app.mount(
     StaticFiles(directory="/Users/krystsina.karpovich/neurogym_backend/uploads"),
     name="uploads",
 )
+app.mount(
+    "/tmp",
+    StaticFiles(directory="/Users/krystsina.karpovich/neurogym_backend/tmp"),
+    name="tmp",
+)
+
 
 
 @app.get("/")
